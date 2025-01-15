@@ -171,9 +171,16 @@ def main_menu(message):
 
 def feed_back(message):
     user_id = message.from_user.id
-    user_name = message.from_user.first_name
+    user_info = db.check_user(user_id)
+    if user_info:
+        user_name = user_info[1]
+        phone_number = user_info[2]
+    else:
+        user_name = "Неизвестный пользователь!"
+        phone_number = "Номер неизвесмен!"
     otziv_text = message.text
-    bot.send_message(-4778814072, f"Новый отзыв от пользователя {user_name}, {user_id}: \n\n {otziv_text}")
+    bot.send_message(-4778814072, f"Новый отзыв от пользователя: \n\n "
+                                  f"Имя: {user_name} \n Телефон: {phone_number} \n ID: {user_id} \n Отзыв: {otziv_text}")
     bot.send_message(user_id, "Спасибо за ваш отзыв!")
 
 bot.infinity_polling()

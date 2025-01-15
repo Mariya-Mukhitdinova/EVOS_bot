@@ -27,10 +27,11 @@ def check_user(user_id):
     connection = sqlite3.connect("fake_EVOS.db")
     sql = connection.cursor()
     checker = sql.execute("SELECT * FROM users WHERE user_id=?", (user_id, )).fetchone()
-    if checker:
-        return True
-    elif not checker:
-        return False
+    # if checker:
+    #     return True
+    # elif not checker:
+    #     return False
+    return checker
 
 def get_all_users():
     connection = sqlite3.connect("fake_EVOS.db")
